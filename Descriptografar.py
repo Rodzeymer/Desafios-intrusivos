@@ -3,7 +3,8 @@ import os
 
 def carregar_chave():
   return open("chave.key", "rb").read()
-
+  
+  
 def descriptografar_arquivo(arquivo, chave):
   f = Fernet(chave)
   with open(arquivo, "rb") as file:
@@ -13,21 +14,22 @@ def descriptografar_arquivo(arquivo, chave):
     file.write(dados_descriptografados)
 
 def encontrar_arquivos(diretorio):
-  print(f"Procurando arquivos em {diretorio}...")
   lista = []
   for raiz, _, arquivos in os.walk(diretorio):
-    for nome in arquivos:
-      caminho = os.path.join(raiz, nome)
-      if nome != "Descriptografar.py" and not nome.endswith(".key"):
-        lista.append(caminho)
-  print(lista)
+      for nome in arquivos:
+          caminho = os.path.join(raiz, nome)
+          if nome != "Descriptografar.py" and not nome.endswith(".key"):
+              lista.append(caminho)
   return lista
 
 def main():
   chave = carregar_chave()
   arquivos = encontrar_arquivos("/workspaces/Desafios-intrusivos")
   for arquivo in arquivos:
-    descriptografar_arquivo(arquivo, chave)
+    try:
+      descriptografar_arquivo(arquivo, chave)
+    except Exception as e:
+      print(f"Não foi possível descriptografar {arquivo}: {e}")
   print("Arquivos restaurados com sucesso")
 if __name__ == "__main__":
   main()
