@@ -1,14 +1,13 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Python File",
-            "type": "python",
+            "name": "Python: Arquivo Atual",
+            "type": "debugpy", // Tipo de depurador para Python
             "request": "launch",
-            "program": "${file}"
+            "program": "${file}", // Variável do VS Code que representa o arquivo ativo
+            "console": "integratedTerminal", // Onde o programa será executado: terminal integrado, terminal externo, ou console de depuração
+            "justMyCode": true // Se deve ignorar o código de bibliotecas externas (True por padrão)
         }
     ]
 }
